@@ -34,17 +34,19 @@ jobs:
           docker build -t devops-app .
 
       - name: Instalar Trivy
-  shell: powershell
-  run: |
-    choco install trivy -y
+       shell: powershell
+       run: |
+           choco install trivy -y
 
-- name: Escanear imagen Docker
-  shell: powershell
-  run: |
-    trivy image devops-app
+-        name: Escanear imagen Docker
+         shell: powershell
+         run: |
+          trivy image devops-app
 
       - name: Análisis con SonarQube
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+          # Reejecutar pipeline

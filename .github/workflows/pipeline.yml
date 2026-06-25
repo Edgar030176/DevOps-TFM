@@ -33,10 +33,7 @@ jobs:
         run: |
           docker build -t devops-app .
 
-      - name: Instalar Trivy
-        shell: powershell
-        run: |
-          choco install trivy -y
+     
 
       - name: Escanear imagen Docker
         shell: powershell

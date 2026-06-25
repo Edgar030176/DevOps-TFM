@@ -22,23 +22,30 @@ jobs:
           python-version: "3.11"
 
       - name: Instalar dependencias
+        shell: powershell
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Ejecutar pruebas
+        shell: powershell
         run: |
           pytest
 
       - name: Construir imagen Docker
+        shell: powershell
         run: |
           docker build -t devops-app .
 
-     
+      - name: Verificar Trivy
+        shell: powershell
+        run: |
+          trivy --version
 
       - name: Escanear imagen Docker
         shell: powershell
         run: |
-          trivy image devops-app
+          trivy image --exit-code 0 --severity HIGH,CRITICAL devops-app
 
       - name: Análisis con SonarQube
         uses: SonarSource/sonarqube-scan-action@v5

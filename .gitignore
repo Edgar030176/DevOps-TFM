@@ -2,3 +2,21 @@ venv/
 __pycache__/
 *.pyc
 .vscode/
+
+# GitHub Self-Hosted Runner
+_diag/
+_work/
+bin/
+externals/
+
+.credentials
+.credentials_rsaparams
+.runner
+
+config.cmd
+run.cmd
+run-helper.cmd
+run-helper.cmd.template
+run-helper.sh.template
+
+actions-runner-*.zip

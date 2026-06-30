@@ -45,4 +45,19 @@ jobs:
       - name: Escanear imagen Docker
         shell: powershell
         run: |
-          trivy image --exit-code 0 --severity HIGH,CRITICAL devops-app
+          trivy image --exit-code 0 --severity HIGH,CRITICAL devops-app      - name: Instalar SonarScanner
+        shell: powershell
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+
+      - name: Ejecutar análisis SonarQube
+      shell: powershell
+     env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      run: |
+      sonar-scanner `
+      -Dsonar.projectKey=DevOps-TFM `
+      -Dsonar.sources=. `
+      -Dsonar.host.url=$env:SONAR_HOST_URL `
+      -Dsonar.token=$env:SONAR_TOKEN

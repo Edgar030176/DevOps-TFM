@@ -47,14 +47,19 @@ jobs:
         run: |
           trivy image --exit-code 0 --severity HIGH,CRITICAL devops-app
 
+      - name: Verificar SonarScanner
+        shell: powershell
+        run: |
+          sonar-scanner -v
+
       - name: Ejecutar análisis SonarQube
         shell: powershell
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner `
-            -Dsonar.projectKey=DevOps-TFM `
-            -Dsonar.sources=. `
-            -Dsonar.host.url=$env:SONAR_HOST_URL `
-            -Dsonar.token=$env:SONAR_TOKEN
+            "-Dsonar.projectKey=DevOps-TFM" `
+            "-Dsonar.sources=." `
+            "-Dsonar.host.url=$env:SONAR_HOST_URL" `
+            "-Dsonar.token=$env:SONAR_TOKEN"

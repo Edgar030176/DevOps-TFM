@@ -59,7 +59,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           sonar-scanner `
-            "-Dsonar.projectKey=DevOps-TFM" `
-            "-Dsonar.sources=." `
-            "-Dsonar.host.url=$env:SONAR_HOST_URL" `
-            "-Dsonar.token=$env:SONAR_TOKEN"
+            -Dsonar.projectKey=DevOps-TFM `
+            -Dsonar.projectName=DevOps-TFM `
+            -Dsonar.sources=. `
+            -Dsonar.host.url=$env:SONAR_HOST_URL `
+            -Dsonar.token=$env:SONAR_TOKEN
